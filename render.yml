@@ -10,4 +10,4 @@
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: FOOTBALL_API_KEY
-        sync: true
+        sync: false
