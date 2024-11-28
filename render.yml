@@ -1,0 +1,13 @@
+﻿services:
+  - type: web
+    name: football-matches
+    env: docker
+    plan: starter
+    buildCommand: "docker build -t football-matches ."
+    startCommand: "docker run -p 80:80 football-matches"
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Prod
+      - key: FOOTBALL_API_KEY
+        sync: true
