@@ -1,92 +1,79 @@
-Football Matches Web Application
+# Football Matches
 
-This project is a web application for tracking recent and upcoming football matches from popular leagues. It provides information about different competitions, teams, and match details.
+Welcome to the Football Matches project! This project provides a web interface to view recent and upcoming football matches from popular leagues.
 
-Table of Contents
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Project](#running-the-project)
+- [Additional Information](#additional-information)
 
-Features
+## Project Overview
+The Football Matches project is a web application that allows users to track recent and upcoming football matches from multiple leagues. The application is built using **ASP.NET Core** for the server-side backend and serves a simple, responsive UI for football enthusiasts.
 
-Technologies Used
+## Prerequisites
+Before setting up and running the project, ensure you have the following dependencies installed:
+- **.NET 6 SDK**
+- **Docker** (if you want to deploy using Docker)
 
-Setup and Installation
+## Installation
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/football-matches.git
+   cd football-matches
+   ```
 
-Running the Project
+2. **Install Dependencies**
+   Restore the required NuGet packages:
+   ```bash
+   dotnet restore
+   ```
 
-Environment Configuration
+## Configuration
+1. **App Settings Configuration**
+   - Update the `appsettings.json` or create a new `appsettings.Development.json` file to include your Football Data API key:
+     ```json
+     "FootballDataApi": {
+       "ApiKey": "your_api_key_here",
+       "BaseUrl": "https://api.football-data.org/v4"
+     }
+     ```
 
-Usage
+2. **Environment Variables**
+   Alternatively, you can set environment variables for the API key to avoid hardcoding sensitive information:
+   ```bash
+   FOOTBALL_API_KEY=your_api_key_here
+   ```
 
-Contact
+## Running the Project
+1. **Run the Application Locally**
+   Use the following command to run the application locally:
+   ```bash
+   dotnet run
+   ```
+   The application will be available at [http://localhost:5000](http://localhost:5000).
 
-Features
+2. **Running with Docker**
+   - **Build the Docker Image**
+     ```bash
+     docker build -t football-matches .
+     ```
+   - **Run the Docker Container**
+     ```bash
+     docker run -p 8080:80 football-matches
+     ```
 
-Track upcoming and recent football matches from popular leagues.
+## Additional Information
+- **Dependencies**
+  - `Microsoft.AspNetCore.App`: Framework for building web applications with ASP.NET Core.
+  - `Newtonsoft.Json`: Used for deserializing the Football Data API responses.
 
-Switch between recent matches and upcoming matches view.
+- **Deployment**
+  - The project can be deployed using services like Render. Ensure that the `Dockerfile` and `render.yaml` are configured correctly for deployment.
 
-Responsive design.
+- **Notes**
+  - Ensure your Football Data API key is active and has sufficient quota for the number of requests you expect to make.
+  - The `ApiKey` should be kept secure and not committed to version control.
 
-Technologies Used
-
-Backend: ASP.NET Core MVC
-
-Frontend: HTML, CSS, JavaScript (reused styles from the original project)
-
-API Integration: Football-Data.org API
-
-Database: No database, data comes from an external API
-
-Setup and Installation
-
-To set up and run this project locally, please follow these instructions:
-
-Clone the repository:
-
-git clone https://github.com/your-username/football-matches.git
-cd football-matches
-
-Install the dependencies:
-Ensure you have .NET 7.0 SDK installed.
-
-Set up API Key:
-Create an environment variable FOOTBALL_API_KEY or add it to the appsettings.json under FootballDataApi.ApiKey. You need to get an API key from Football-Data.org.
-
-Configure Environment:
-If you plan to use Render or any hosting, ensure you have set up your environment variables in their respective environment settings.
-
-Running the Project
-
-Local Development
-
-Start the application:
-
-dotnet run
-
-View the application:
-The application runs on https://localhost:5001 (HTTPS) or http://localhost:5000 (HTTP).
-
-Deployment
-
-This application is set up to be deployed using Render. To deploy it:
-
-Ensure Docker is installed if using a Docker deployment.
-
-Push the repository to Render and use the .yaml file to set up the deployment.
-
-Add required environment variables (such as FOOTBALL_API_KEY) in Render Dashboard under Environment settings.
-
-Environment Configuration
-
-Ensure you configure the following environment variables:
-
-FOOTBALL_API_KEY: API key to access football match data from Football-Data.org.
-
-To set environment variables in Render, go to your app's environment settings and add them manually.
-
-Usage
-
-Open the homepage, which displays upcoming and recent football matches.
-
-Click on "Upcoming Matches" or "Recent Matches" to switch between different match types.
-
-Matches are grouped by leagues and displayed as a carousel for easy browsing.
