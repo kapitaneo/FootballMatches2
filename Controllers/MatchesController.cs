@@ -16,7 +16,13 @@ namespace FootballMatches.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string type)
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMatches(string type)
         {
 
             if (!Enum.TryParse(type, true, out MatchTypes typem))
@@ -27,7 +33,7 @@ namespace FootballMatches.Controllers
             var response = await _footballDataService.GetMatchesAsync(typem);
 
             var results = JsonConvert.DeserializeObject<ApiResponse>(response);
-            List<LeagueMatchesViewModel> matches = null;
+            List<LeagueMatchesViewModel> matches;
 
             if (results?.Matches.Count > 0)
             {
@@ -35,12 +41,12 @@ namespace FootballMatches.Controllers
             }
             else
             {
-                //HACK: Mock data if API is not available is showing how is carusel working
+                //HACK: Mock data if API is not available and the app is showing how is carusel working
                 matches = GroupingMatchesForView(GetMockData());
             }
 
             ViewData["MatchType"] = type;
-            return View(matches);
+            return View("Index", matches);
         }
 
         private static List<LeagueMatchesViewModel>? GroupingMatchesForView(List<Match> results)

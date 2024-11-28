@@ -15,7 +15,7 @@ The Football Matches project is a web application that allows users to track rec
 
 ## Prerequisites
 Before setting up and running the project, ensure you have the following dependencies installed:
-- **.NET 6 SDK**
+- **.NET 8**
 - **Docker** (if you want to deploy using Docker)
 
 ## Installation
@@ -35,16 +35,14 @@ Before setting up and running the project, ensure you have the following depende
 1. **App Settings Configuration**
    - Update the `appsettings.json` or create a new `appsettings.Development.json` file to include your Football Data API key:
      ```json
-     "FootballDataApi": {
        "ApiKey": "your_api_key_here",
        "BaseUrl": "https://api.football-data.org/v4"
-     }
      ```
 
 2. **Environment Variables**
    Alternatively, you can set environment variables for the API key to avoid hardcoding sensitive information:
    ```bash
-   FOOTBALL_API_KEY=your_api_key_here
+   ApiKey=your_api_key_here
    ```
 
 ## Running the Project

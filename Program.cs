@@ -1,5 +1,4 @@
 using FootballMatches.Services;
-using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Matches}/{action=Index}/{type?}");
+    pattern: "{controller=Matches}/{action=Index}");
 
 app.Run();

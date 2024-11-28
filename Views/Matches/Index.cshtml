@@ -5,7 +5,7 @@
 }
 
 @{
-    var matchType = ViewData["MatchType"]?.ToString() ?? "SCHEDULED";
+    var matchType = ViewData["MatchType"]?.ToString() ?? "";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +28,8 @@
         </header>
 
         <div class="switcher-container">
-            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.SCHEDULED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("Index", new { type = "SCHEDULED" })'">Upcoming Matches</button>
-            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.FINISHED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("Index", new { type =  "FINISHED"})'">Recent Matches</button>
+            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.SCHEDULED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("GetMatches", new { type = "SCHEDULED" })'">Upcoming Matches</button>
+            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.FINISHED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("GetMatches", new { type =  "FINISHED"})'">Recent Matches</button>
         </div>
 
         <div id="loading" style="display: none;">Loading matches...</div>
@@ -50,10 +50,6 @@
                         }
                     </div>
                 }
-            }
-            else
-            {
-                <p>No match data available at the moment.</p>
             }
         </div>
     </div>
