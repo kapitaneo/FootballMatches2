@@ -8,6 +8,6 @@
     dockerfilePath: Dockerfile
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
-        value: Prod
+        value: Production
       - key: FOOTBALL_API_KEY
         sync: true
