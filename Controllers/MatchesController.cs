@@ -15,12 +15,21 @@ namespace FootballMatches.Controllers
             _footballDataService = footballDataService;
         }
 
+        /// <summary>
+        /// Return the general view
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Return the matches based on the type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetMatches(string type)
         {
@@ -30,25 +39,40 @@ namespace FootballMatches.Controllers
                 typem = MatchTypes.SCHEDULED;
             }
 
-            var response = await _footballDataService.GetMatchesAsync(typem);
-
-            var results = JsonConvert.DeserializeObject<ApiResponse>(response);
-            List<LeagueMatchesViewModel> matches;
-
-            if (results?.Matches.Count > 0)
+            try
             {
-                matches = GroupingMatchesForView(results.Matches);
-            }
-            else
-            {
-                //HACK: Mock data if API is not available and the app is showing how is carusel working
-                matches = GroupingMatchesForView(GetMockData());
-            }
+                var response = await _footballDataService.GetMatchesAsync(typem);
 
-            ViewData["MatchType"] = type;
-            return View("Index", matches);
+                var results = JsonConvert.DeserializeObject<ApiResponse>(response);
+                List<LeagueMatchesViewModel> matches;
+
+                if (results?.Matches.Count > 0)
+                {
+                    matches = GroupingMatchesForView(results.Matches);
+                }
+                else
+                {
+                    //HACK: Mock data if API return empty result, and the app is showing how is carusel working
+                    matches = GroupingMatchesForView(GetMockData());
+                }
+
+                ViewData["MatchType"] = type;
+                return View("Index", matches);
+            }
+            catch
+            {
+                //TODO: Log the exception
+                //HACK: Mock data if API is not available, and the app is showing how is carusel working
+                ViewData["MatchType"] = type;
+                return View("Index", GroupingMatchesForView(GetMockData()));
+            }
         }
 
+        /// <summary>
+        /// Method to group the matches by competition
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
         private static List<LeagueMatchesViewModel>? GroupingMatchesForView(List<Match> results)
         {
             return results?
@@ -57,6 +81,10 @@ namespace FootballMatches.Controllers
                 .Select(g => new LeagueMatchesViewModel { CompetitionName = g.Key, Matches = g.ToList() }).ToList();
         }
 
+        /// <summary>
+        /// Create a mock data to show the carousel
+        /// </summary>
+        /// <returns></returns>
         private List<Match> GetMockData()
         {
             return new List<Match>

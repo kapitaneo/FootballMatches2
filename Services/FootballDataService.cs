@@ -19,6 +19,11 @@ namespace FootballMatches.Services
             _baseApi = configuration["BaseUrl"];
         }
 
+        /// <summary>
+        /// Method request the matches based on the type from remote API
+        /// </summary>
+        /// <param name="matchType"></param>
+        /// <returns></returns>
         public async Task<string> GetMatchesAsync(MatchTypes matchType)
         {
             if(_cache.TryGetValue(matchType, out string cachedData))
@@ -30,16 +35,13 @@ namespace FootballMatches.Services
             string status = matchType.ToString();
 
             var response = await _httpClient.GetAsync($"{_baseApi}/matches?status={status}");
+            response.EnsureSuccessStatusCode();
 
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                _cache.Set(matchType, result, CacheDuration);
+            var result = await response.Content.ReadAsStringAsync();
 
-                return result;
-            }
+            _cache.Set(matchType, result, CacheDuration);
 
-            return null;
+            return result;
         }
     }
 }
