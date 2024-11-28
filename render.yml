@@ -9,5 +9,5 @@
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-      - key: FOOTBALL_API_KEY
+      - key: ApiKey
         sync: false

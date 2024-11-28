@@ -15,8 +15,8 @@ namespace FootballMatches.Services
         {
             _httpClient = httpClient;
             _cache = cache;
-            _apiKey = configuration["FootballDataApi:ApiKey"];
-            _baseApi = configuration["FootballDataApi:BaseUrl"];
+            _apiKey = configuration["ApiKey"];
+            _baseApi = configuration["BaseUrl"];
         }
 
         public async Task<string> GetMatchesAsync(MatchTypes matchType)
