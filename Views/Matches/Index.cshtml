@@ -28,11 +28,11 @@
         </header>
 
         <div class="switcher-container">
-            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.SCHEDULED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("GetMatches", new { type = "SCHEDULED" })'">Upcoming Matches</button>
-            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.FINISHED.ToString() ? "active" : "")" onclick="location.href='@Url.Action("GetMatches", new { type =  "FINISHED"})'">Recent Matches</button>
+            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.SCHEDULED.ToString() ? "active" : "")" onclick="showSpinnerAndRedirect('@Url.Action("GetMatches", new { type = "SCHEDULED" })')">Upcoming Matches</button>
+            <button class="switch-button @(matchType == FootballMatches.Common.MatchTypes.FINISHED.ToString() ? "active" : "")" onclick="showSpinnerAndRedirect('@Url.Action("GetMatches", new { type =  "FINISHED"})')">Recent Matches</button>
         </div>
 
-        <div id="loading" style="display: none;">Loading matches...</div>
+        <div id="loading-spinner" style="display: none;">Loading matches...</div>
 
         <div id="leagues-container">
             @if (Model != null && Model.Any())
@@ -53,5 +53,8 @@
             }
         </div>
     </div>
+
+    <script src="~/js/scripts.js"></script>
 </body>
+
 </html>
