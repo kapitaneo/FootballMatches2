@@ -25,7 +25,7 @@ namespace FootballMatches.Services
             {
                 return cachedData;
             }
-
+            Console.WriteLine(_apiKey);
             _httpClient.DefaultRequestHeaders.Add("X-Auth-Token", _apiKey);
             string status = matchType.ToString();
 
