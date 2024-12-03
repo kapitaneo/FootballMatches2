@@ -1,0 +1,26 @@
+﻿.league-container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    background-color: #ffea83;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.league-title {
+    font-size: 24px;
+    color: #2b9348;
+    margin-bottom: 10px;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}

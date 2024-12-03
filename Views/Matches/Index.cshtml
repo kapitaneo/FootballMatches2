@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FootballMatches.Models.LeagueMatchesViewModel>
+﻿@using Newtonsoft.Json
+@model IEnumerable<FootballMatches.Models.LeagueMatchesViewModel>
 
 @{
     ViewData["Title"] = "Football Matches";
@@ -37,24 +38,17 @@
         <div id="leagues-container">
             @if (Model != null && Model.Any())
             {
-                foreach (var league in Model)
+                @foreach (var league in Model)
                 {
-                    <h2 class="league-title">@league.CompetitionName</h2>
-                    <div class="carousel">
-                        @foreach (var match in league.Matches)
-                        {
-                            <div class="match-card">
-                                <h3>@match.HomeTeam.Name vs @match.AwayTeam.Name</h3>
-                                <p>Date: @match.UtcDate.ToString("yyyy-MM-dd HH:mm")</p>
-                            </div>
-                        }
-                    </div>
+                    <league-card league-name="@league.CompetitionName" matches='@Html.Raw(JsonConvert.SerializeObject(league.Matches))'></league-card>
                 }
             }
         </div>
     </div>
 
     <script src="~/js/scripts.js"></script>
+    <script src="~/js/components/league-card.js"></script>
+
 </body>
 
 </html>
